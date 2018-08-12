@@ -1,32 +1,30 @@
-import React, { Component } from 'react';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import React, {
+  Component
+} from "react";
+import {
+  Container,
+  Content,
+  Footer,
+  FooterTab,
+  Button,
+  Text
+} from "native-base";
+import MainHeader from "./src/components/MainHeader";
 export default class AnatomyExample extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       fontsLoaded: false
-    }
+    };
   }
 
   render() {
     if (this.state.fontsLoaded)
       return (
         <Container>
-          <Header>
-            <Left>
-              <Button transparent>
-                <Icon name='menu' />
-              </Button>
-            </Left>
-            <Body>
-              <Title>Header</Title>
-            </Body>
-            <Right />
-          </Header>
+          <MainHeader />
           <Content>
-            <Text>
-              This is Content Section
-            </Text>
+            <Text>This is Content Section</Text>
           </Content>
           <Footer>
             <FooterTab>
@@ -42,18 +40,18 @@ export default class AnatomyExample extends Component {
         <Container>
           <Text>Loadinng...</Text>
         </Container>
-      )
+      );
   }
 
   async componentWillMount() {
     await Expo.Font.loadAsync({
-      'Roboto': require('native-base/Fonts/Roboto.ttf'),
-      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
     });
 
     this.setState({
       ...this.state,
       fontsLoaded: true
-    })
+    });
   }
 }
