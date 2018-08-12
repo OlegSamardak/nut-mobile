@@ -10,6 +10,7 @@ import {
   Text
 } from "native-base";
 import MainHeader from "./src/components/MainHeader";
+import MapComponent from "./src/components/MapComponent";
 export default class AnatomyExample extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ export default class AnatomyExample extends Component {
         <Container>
           <MainHeader />
           <Content>
-            <Text>This is Content Section</Text>
+            <MapComponent />
           </Content>
           <Footer>
             <FooterTab>
