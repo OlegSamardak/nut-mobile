@@ -1,39 +1,50 @@
-import React, {
-  Component
-} from "react";
+import React, { Component } from "react";
 import {
   Container,
   Content,
   Footer,
   FooterTab,
   Button,
-  Text
+  Header
 } from "native-base";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  InteractionManager,
+} from 'react-native';
 import MainHeader from "./src/components/MainHeader";
 import MapComponent from "./src/components/MapComponent";
-export default class AnatomyExample extends Component {
+
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fontsLoaded: false
+      loading: false
     };
   }
 
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({ loading: false });
+    });
+  }
+
   render() {
-    if (this.state.fontsLoaded)
+    if (this.state.loading)
       return (
         <Container>
           <MainHeader />
-          <Content>
-            <MapComponent />
-          </Content>
-          <Footer>
-            <FooterTab>
-              <Button full>
-                <Text>Footer</Text>
-              </Button>
-            </FooterTab>
-          </Footer>
+          <View style={styles.container}>
+            {this.state.loading ? (
+              <MapComponent styles={styles.map}/>
+            ) : (
+              <Container>
+              <Text>Loadinng...</Text>
+            </Container>
+            )}
+          </View>
         </Container>
       );
     else
@@ -49,10 +60,21 @@ export default class AnatomyExample extends Component {
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
     });
-
     this.setState({
       ...this.state,
-      fontsLoaded: true
+      loading: true
     });
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  map: {
+    marginTop: 1.5,
+    ...StyleSheet.absoluteFillObject
+  }
+});

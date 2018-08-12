@@ -1,29 +1,21 @@
-import React, { Component } from "react";
-import { Text, View } from "react-native";
-import MapView from "react-native-maps";
-
-export default class MapComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      }
-    };
-  }
-
-  onRegionChange(region) {
-    this.setState({ region });
-  }
-
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { MapView } from "expo";
+export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
   render() {
     return (
       <MapView
-        region={this.state.region}
-        onRegionChange={this.onRegionChange}
+        style={this.props.styles}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
+        }}
+        
       />
     );
   }
